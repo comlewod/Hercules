@@ -1,0 +1,22 @@
+{
+  "name": "hercules",
+  "version": "1.0.0",
+  "description": "webpack program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comlewod/Hercules.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comlewod/Hercules/issues"
+  },
+  "homepage": "https://github.com/comlewod/Hercules#readme",
+  "devDependencies": {
+    "webpack": "^4.1.1"
+  }
+}
