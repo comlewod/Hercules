@@ -4,7 +4,7 @@
   "description": "webpack program",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/comlewod/Hercules#readme",
   "devDependencies": {
+    "nodemon": "^1.17.2",
     "webpack": "^4.1.1"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
   }
 }
