@@ -14,14 +14,35 @@ var config = {
 				use: [{
 					loader: 'babel-loader',	//加载babel是babel-loader的缩写
 					options: {
-						presets: ['babel-preset-react']
+						presets: ['babel-preset-react']	//需要这个插件对文件内容进行处理
 					}
 				}]
+			},
+			{
+				test: /\.less$/,
+				use: [
+					{
+						loader: 'style-loader'
+					},
+					{
+						loader: 'css-loader'
+					},
+					{
+						loader: 'less-loader'
+					}
+				]
 			}
 		]
 	},
+	externals: {
+		'react': 'React',		//将script引入的react的中全局变量React变成webpack的模块react
+		'react-dom': 'ReactDOM'
+	},
 	plugins: [
-		new htmlWebpackPlugin(),
+		new htmlWebpackPlugin({
+			title: 'My app',
+			template: 'src/template.html'
+		}),
 	],
 };
 
