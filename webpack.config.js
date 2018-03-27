@@ -1,11 +1,16 @@
 const path = require('path');
+const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
 var config = {
-	entry: path.resolve(__dirname, 'src/app.js'),
+	entry: {
+		app: path.resolve(__dirname, 'src/app.js'),
+		list: path.resolve(__dirname, 'src/list.js'),
+	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'bundle.js'
+		filename: '[name]-bundle.js'
 	},
 	module: {
 		rules: [
@@ -21,15 +26,10 @@ var config = {
 			{
 				test: /\.less$/,
 				use: [
-					{
-						loader: 'style-loader'
-					},
-					{
-						loader: 'css-loader'
-					},
-					{
-						loader: 'less-loader'
-					}
+					miniCssExtractPlugin.loader,	//将css文件单独打包
+					//'style-loader',	//将css模块写入style标签内
+					'css-loader',	//将css转成commonjs模块
+					'less-loader',	//将less转成css
 				]
 			}
 		]
@@ -42,6 +42,10 @@ var config = {
 		new htmlWebpackPlugin({
 			title: 'My app',
 			template: 'src/template.html'
+		}),
+		//单独生成css文件
+		new miniCssExtractPlugin({
+			filename: "[name].css"
 		}),
 	],
 };

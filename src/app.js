@@ -1,9 +1,10 @@
 'use strict'
 
 import react from 'react';
-import component from './component.jsx';
+import component from './components/component.jsx';
 
-import './test.less';
+import './less/test.less';
+console.log('app test');
 
 //react.render(`<component>`, document.getElementById('app'));
 
