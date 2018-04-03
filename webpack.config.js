@@ -9,7 +9,7 @@ var config = {
 		list: path.resolve(__dirname, 'src/list.js'),
 	},
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, 'dist'),	//需要传入绝对路径
 		filename: '[name]-bundle.js'
 	},
 	module: {
