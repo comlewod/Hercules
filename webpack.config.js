@@ -12,6 +12,9 @@ var config = {
 		path: path.resolve(__dirname, 'dist'),	//需要传入绝对路径
 		filename: '[name]-bundle.js'
 	},
+	resolve: {
+		extensions: ['.js', '.jsx', '.less']	//设置require或import的时候可以不需要带后缀
+	},
 	module: {
 		rules: [
 			{
