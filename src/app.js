@@ -25,6 +25,7 @@ import List from './list';
 //	</Router>
 //, document.getElementById('app'));
 
+//路由器组件无法接受两个及以上的子元素。
 render(
 	<BrowserRouter>
 		<List />

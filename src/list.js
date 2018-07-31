@@ -3,12 +3,14 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 import Category from './category';
 import Product from './product';
+import Aheader from './components/header';
 
 class List extends Component {
 	render() {
 		return (
 			<div>
 				<div>
+				<Aheader />
 					<div><Link to="/">page</Link></div>
 					<div><Link to="/body">body</Link></div>
 					<div><Link to="/category">category</Link></div>
@@ -20,6 +22,8 @@ class List extends Component {
 					<Route path="/category" component={Category} />
 					<Route path="/product" component={Category} />
 				</Switch>
+
+				{(function () { return 'javascript test' })()}
 			</div>
 		);
 	}
