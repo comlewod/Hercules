@@ -5,10 +5,11 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
 var config = {
 	entry: {
-		app: path.resolve(__dirname, 'src/app.js'),
-		list: path.resolve(__dirname, 'src/list.js'),
+		app: ['webpack-hot-middleware/client?noInfo=true&reload=true', path.resolve(__dirname, 'src/app.js')],
+		//list: ['webpack-hot-middleware/client?noInfo=true&reload=true', path.resolve(__dirname, 'src/list.js')],
 	},
 	output: {
+		publicPath: '/',
 		path: path.resolve(__dirname, 'dist'),	//需要传入绝对路径
 		filename: '[name]-bundle.js'
 	},
@@ -50,7 +51,10 @@ var config = {
 		new miniCssExtractPlugin({
 			filename: "[name].css"
 		}),
+		//实现浏览器刷新必写
+		new webpack.HotModuleReplacementPlugin(),	
 	],
+	mode: "development"
 };
 
 module.exports = config;

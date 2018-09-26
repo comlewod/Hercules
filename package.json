@@ -4,8 +4,8 @@
   "description": "webpack program",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./bin/www",
-    "start": "webpack-dev-server --inline --hot --mode development"
+    "dev": "node ./bin/www",
+    "start": "webpack-dev-server --devtool eval --inline --hot --colors --mode development"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
     "nodemon": "^1.17.2",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-dev-server": "^3.1.1",
+    "webpack-hot-middleware": "^2.24.2"
   },
   "dependencies": {
     "babel-loader": "^7.1.4",
