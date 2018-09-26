@@ -9,6 +9,7 @@ var compiler = webpack(webpackConfig);
 
 var app = express();
 
+//开发环境使用这两个中间件
 app.use(webpackDevMiddleware(compiler, {
 	publicPath: webpackConfig.publicPath,
 	quiet: true,
@@ -19,7 +20,7 @@ app.use(webpackHotMiddleware(compiler, {
 	heartbeat: 2000
 }));
 
-app.get('/', (req, res) => {
+app.get('/haha', (req, res) => {
 	res.send('haha');
 });
 

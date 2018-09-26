@@ -3,10 +3,13 @@ const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
+//通过express中间件实现热替换时必须加上
+const hotQuery = "webpack-hot-middleware/client?noInfo=true&reload=true";
+
 var config = {
 	entry: {
-		app: ['webpack-hot-middleware/client?noInfo=true&reload=true', path.resolve(__dirname, 'src/app.js')],
-		//list: ['webpack-hot-middleware/client?noInfo=true&reload=true', path.resolve(__dirname, 'src/list.js')],
+		app: [hotQuery, path.resolve(__dirname, 'src/app.js')],
+		//list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
 	},
 	output: {
 		publicPath: '/',
@@ -51,7 +54,7 @@ var config = {
 		new miniCssExtractPlugin({
 			filename: "[name].css"
 		}),
-		//实现浏览器刷新必写
+		//通过express中间件实现热替换时，实现浏览器刷新必写
 		new webpack.HotModuleReplacementPlugin(),	
 	],
 	mode: "development"
