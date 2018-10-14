@@ -7,7 +7,7 @@ import component from './components/component';
 import header from './components/header';
 //import { createBrowserHistory } from 'history'; 
 
-import { BrowserRouter } from 'react-router-dom';//browserHistroy模块已经从react-router独立出来，可以监听url变化，并生成location对象，并匹配到路由组件
+import { HashRouter, BrowserRouter } from 'react-router-dom';//browserHistroy模块已经从react-router独立出来，可以监听url变化，并生成location对象，并匹配到路由组件
 //react-router-dom相比于react-router，提供了不少组件：Link、browserHistroy等
 
 import './less/test';

@@ -10,7 +10,7 @@ class List extends Component {
 		return (
 			<div>
 				<div>
-				<Aheader />
+					<Aheader />
 					<div><Link to="/">page</Link></div>
 					<div><Link to="/body">body</Link></div>
 					<div><Link to="/category">category</Link></div>
@@ -23,7 +23,7 @@ class List extends Component {
 					<Route path="/product" component={Category} />
 				</Switch>
 
-				{(function () { return 'javascript test' })()}
+				{(function(){ return 'javascript test' })()}
 			</div>
 		);
 	}

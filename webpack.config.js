@@ -8,8 +8,9 @@ const hotQuery = "webpack-hot-middleware/client?noInfo=true&reload=true";
 
 var config = {
 	entry: {
+		//有多少个对象就会引用多少个打包后的js文件
 		app: [hotQuery, path.resolve(__dirname, 'src/app.js')],
-		//list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
+		list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
 	},
 	output: {
 		publicPath: '/',
@@ -41,6 +42,7 @@ var config = {
 			}
 		]
 	},
+	//打包时不处理的依赖包
 	externals: {
 		'react': 'React',		//将script引入的react的中全局变量React变成webpack的模块react
 		'react-dom': 'ReactDOM'

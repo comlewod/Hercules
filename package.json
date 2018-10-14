@@ -4,7 +4,7 @@
   "description": "webpack program",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
     "start": "webpack-dev-server --devtool eval --inline --hot --colors --mode development"
   },
   "repository": {

@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -20,8 +21,11 @@ app.use(webpackHotMiddleware(compiler, {
 	heartbeat: 2000
 }));
 
-app.get('/haha', (req, res) => {
-	res.send('haha');
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+	//不使用渲染引擎，所以使用sendFile
+	res.sendFile(__dirname + '/dist/index.html');
 });
 
 module.exports = app;
