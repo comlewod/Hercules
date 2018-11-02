@@ -4,7 +4,9 @@
   "description": "webpack program",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./bin/www",
+    "dev": "nodemon bin/www",
+    "build": "webpack",
+    "dev-pack": "nodemon webpack.dev.js",
     "start": "webpack-dev-server --devtool eval --inline --hot --colors --mode development"
   },
   "repository": {
@@ -23,6 +25,7 @@
     "html-webpack-plugin": "^3.0.6",
     "mini-css-extract-plugin": "^0.2.0",
     "nodemon": "^1.17.2",
+    "react-dev-utils": "^6.1.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-middleware": "^3.4.0",

@@ -11,7 +11,7 @@ import { HashRouter, BrowserRouter } from 'react-router-dom';//browserHistroy模
 //react-router-dom相比于react-router，提供了不少组件：Link、browserHistroy等
 
 import './less/test';
-import List from './list';
+import List from './components/list';
 
 //const history = createBrowserHistory();
 

@@ -3,7 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 import Category from './category';
 import Product from './product';
-import Aheader from './components/header';
+import Aheader from './header';
 
 class List extends Component {
 	render() {

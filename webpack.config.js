@@ -3,18 +3,16 @@ const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
-//通过express中间件实现热替换时必须加上
-const hotQuery = "webpack-hot-middleware/client?noInfo=true&reload=true";
-
 var config = {
 	entry: {
+		app: path.resolve(__dirname, 'src/app.jsx')
 		//有多少个对象就会引用多少个打包后的js文件
-		app: [hotQuery, path.resolve(__dirname, 'src/app.js')],
-		list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
+		//app: [hotQuery, path.resolve(__dirname, 'src/app.js')],
+		//list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
 	},
 	output: {
-		publicPath: '/',
-		path: path.resolve(__dirname, 'dist'),	//需要传入绝对路径
+		publicPath: '/',	//开发环境和生产环境不一样，线上可能是使用cdn，该值会直接生成在资源前面
+		path: path.resolve(__dirname, 'dist'),	//需要传入输出文件绝对路径
 		filename: '[name]-bundle.js'
 	},
 	resolve: {
@@ -56,10 +54,8 @@ var config = {
 		new miniCssExtractPlugin({
 			filename: "[name].css"
 		}),
-		//通过express中间件实现热替换时，实现浏览器刷新必写
-		new webpack.HotModuleReplacementPlugin(),	
 	],
-	mode: "development"
+	mode: 'production'
 };
 
 module.exports = config;
