@@ -5,6 +5,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const hotQuery = "webpack-hot-middleware/client?noInfo=true&reload=true";
+const config = require('./config');
 let webpackConfig = require('./webpack.config.js');
 
 webpackConfig.mode = "development";
@@ -19,7 +20,7 @@ let app = express();
 
 //开发环境使用这两个中间件
 app.use(webpackDevMiddleware(compiler, {
-	publicPath: webpackConfig.publicPath,
+	publicPath: webpackConfig.output.publicPath,
 	quiet: true,
 }));
 
@@ -29,12 +30,12 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 //优先获取webpack的静态资源，所以express.static要写在后面，且静态资源要路径相同
-app.use(express.static(path.join(__dirname, 'dist')));	
+app.use(express.static(path.join(__dirname, 'public')));	
 
 app.get('*', (req, res) => {
 	//不使用渲染引擎，所以使用sendFile
-	res.sendFile(__dirname + '/dist/index.html');
+	res.sendFile(__dirname + '/views/index.html');
 });
 
-app.listen(5000);
+app.listen(config.SERVER_PORT);
 

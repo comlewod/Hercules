@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon bin/www",
     "build": "webpack",
-    "fe-dev": "nodemon webpack.dev.js",
+    "fe-dev": "nodemon NODE_ENV=production webpack.dev.js",
     "start": "webpack-dev-server --devtool eval --inline --hot --colors --mode development"
   },
   "repository": {

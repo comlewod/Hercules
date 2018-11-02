@@ -4,18 +4,19 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
 var config = {
+	devtool: 'source-map',	//问题可以直接定位到源码，而不是压缩后的代码 
 	entry: {
-		app: path.resolve(__dirname, 'src/app.jsx')
+		app: path.resolve(__dirname, 'src', 'app.jsx')
 		//有多少个对象就会引用多少个打包后的js文件
 		//app: [hotQuery, path.resolve(__dirname, 'src/app.js')],
 		//list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
 	},
 	output: {
-		publicPath: '/',	//开发环境和生产环境不一样，线上可能是使用cdn，该值会直接生成在资源前面
-		path: path.resolve(__dirname, 'dist'),	//需要传入输出文件绝对路径
+		publicPath: '/dist/',	//开发环境和生产环境不一样，线上可能是使用cdn，该值会直接生成在资源前面
+		path: path.resolve(__dirname, 'public', 'dist'),	//需要传入输出文件绝对路径
+		//chunkFilename: '[name].[chunkhash:6].js',
 		filename: '[name]-bundle.js'
 	},
-	devtool: 'source-map',	//问题可以直接定位到源码，而不是压缩后的代码 
 	resolve: {
 		extensions: ['.js', '.jsx', '.less']	//设置require或import的时候可以不需要带后缀
 	},
@@ -49,6 +50,7 @@ var config = {
 	plugins: [
 		new htmlWebpackPlugin({
 			title: 'My app',
+			filename: path.resolve(__dirname, 'views', 'index.html'),	//这里需要传入绝对路径
 			template: 'src/template.html'
 		}),
 		//单独生成css文件

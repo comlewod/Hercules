@@ -21,6 +21,7 @@ class List extends Component {
 					<Route path="/body" component={Body} />
 					<Route path="/category" component={Category} />
 					<Route path="/product" component={Category} />
+					<Route component={Nomatch} />
 				</Switch>
 
 				{(function(){ return 'javascript test' })()}
@@ -31,6 +32,10 @@ class List extends Component {
 
 const Header = () => (
 	<h2>HEADER</h2>
+);
+
+const Nomatch = () => (
+	<h1>404</h1>
 );
 
 const Body = (props) => (
