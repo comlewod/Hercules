@@ -15,6 +15,7 @@ var config = {
 		path: path.resolve(__dirname, 'dist'),	//需要传入输出文件绝对路径
 		filename: '[name]-bundle.js'
 	},
+	devtool: 'source-map',	//问题可以直接定位到源码，而不是压缩后的代码 
 	resolve: {
 		extensions: ['.js', '.jsx', '.less']	//设置require或import的时候可以不需要带后缀
 	},
