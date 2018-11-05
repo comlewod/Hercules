@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
 import Category from './category';
-import Product from './product';
 import Aheader from './header';
+
+/* 
+ *	按需加载 
+ */
+import lazyload from '../lazyload';
+
+/*
+ *	使用 bundle-loader 插件引用组件，返回的实际上是包装后的组件异步加载的函数
+ *	name是生成js文件名称，这里是test.bundle.js
+ */
+import Test from 'bundle-loader?lazy&name=test!./test';	
 
 class List extends Component {
 	render() {
@@ -15,12 +25,16 @@ class List extends Component {
 					<div><Link to="/body">body</Link></div>
 					<div><Link to="/category">category</Link></div>
 					<div><Link to="/product">product</Link></div>
+					<div><Link to="/test">按需加载</Link></div>
 				</div>
 				<Switch>
 					<Route exact path="/" component={Header} />
 					<Route path="/body" component={Body} />
 					<Route path="/category" component={Category} />
 					<Route path="/product" component={Category} />
+
+					<Route path="/test" component={lazyload(Test)} />
+
 					<Route component={Nomatch} />
 				</Switch>
 

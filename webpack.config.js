@@ -6,7 +6,7 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 var config = {
 	devtool: 'source-map',	//问题可以直接定位到源码，而不是压缩后的代码 
 	entry: {
-		app: path.resolve(__dirname, 'src', 'app.jsx')
+		app: path.resolve(__dirname, 'src', 'app.js')
 		//有多少个对象就会引用多少个打包后的js文件
 		//app: [hotQuery, path.resolve(__dirname, 'src/app.js')],
 		//list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
