@@ -44,13 +44,16 @@ class List extends Component {
 	}
 }
 
+//自定义组件是一个返回react元素的函数
+//箭头函数可以直接返回表达式
 const Header = () => (
 	<h2>HEADER</h2>
 );
-
-const Nomatch = () => (
-	<h1>404</h1>
-);
+//等同于上面的Header
+const Nomatch = () => {
+	return <h1>404</h1>;
+};
+//上面是普通函数构造组件，如果要使用生命周期等钩子，可以通过react.component来创建组件类
 
 const Body = (props) => (
 	<div>
