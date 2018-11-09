@@ -1,10 +1,87 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Webpack App</title>
-		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-	<body>
-		<!--<img src="img/haha.jpg" />-->
-		<div id="app">aa</div>
+<head>
+<meta charset="UTF-8">
+<title>Webpack App</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<style>
+body {
+	font-size: 12px;
+}
+#canvas {
+	border: 1px solid #ccc;
+	display: none;
+}
+
+#draw div {
+	height: 10px;
+}
+#draw span {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	line-height: 10px;
+	vertical-align: middle;
+}
+#draw br {
+}
+</style>
+<body>
+<!--<img src="img/haha.jpg" />-->
+<canvas id="canvas" width="600" height="600"></canvas>
+<div id="draw">
+</div>
+
+<script>
+
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+let img = new Image();
+let originColor = [];
+let strArr = [];
+let maxNum = 255;
+img.onload = () => {
+	ctx.drawImage(img, 0, 0);
+	let width = img.width;
+	let height = img.height;
+	let imgData = ctx.getImageData(0, 0, width, height);
+	
+	for( let i=0; i<imgData.data.length; i+=4 ){
+		let data = imgData.data;
+		let r = data[i];
+		let g = data[i+1];
+		let b = data[i+2];
+		let a = data[i+3]/maxNum;
+		let gray = parseInt((r + g + b)/3);
+		imgData.data[i] = gray;
+		imgData.data[i+1] = gray;
+		imgData.data[i+2] = gray;
+		strArr.push(maxNum - gray);
+		originColor.push(r + ',' + g + ',' + b + ',' + a);
+	}
+	ctx.putImageData(imgData, 0, 0);
+	
+	let symbolArr = [' ', '.', '-', ';', '/', '0', '%', '#', '&', '@'];
+	let allStr = '';
+	for( let j=0; j<height; j++ ){
+		allStr += '<div>';
+		for( let i=0; i<width; i++ ){
+			let num = j * width + i;
+			let point = strArr[num];
+			let color = originColor[num];
+			let index = parseInt(symbolArr.length * (point/maxNum)) - 1;
+			index = index < 0 ? 0 : index;
+			//let str = '<span style="color: rgba(' + color + ')">' + symbolArr[index] + '</span>';
+			let str = '<span>' + symbolArr[index] + '</span>';
+			allStr += str;
+		}
+		allStr += '</div>';
+	}
+	$('#draw').html(allStr);
+};
+img.src = "img/model.png";
+
+</script>
+
+</body>
 </html>
