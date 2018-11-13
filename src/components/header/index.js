@@ -4,10 +4,13 @@ import './style'
 
 class Header extends Component{
 	render(){
-		return (
-			<div className="header">hahaha</div>
-		);
+		return DOM;
 	}
 }
+
+const DOM = (
+	<div className="header">
+	</div>
+)
 
 export default Header;

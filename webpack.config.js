@@ -1,7 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const cleanWebpackPlugin = require('clean-webpack-plugin');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');//不支持开发环境的热替换
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');//支持开发环境的热替换
 
 var config = {
 	devtool: 'source-map',	//问题可以直接定位到源码，而不是压缩后的代码 
@@ -35,8 +37,9 @@ var config = {
 			{
 				test: /\.less$/,
 				use: [
-					miniCssExtractPlugin.loader,	//将css文件单独打包
-					//'style-loader',	//将css模块写入style标签内
+					//miniCssExtractPlugin.loader,	//将css拆分打包成css文件，但不支持hmr
+					ExtractCssChunks.loader,	//将css拆分打包成css文件，支持hmr
+					//'style-loader',	//将css模块写入style标签内，因此支持hmr（热替换）
 					'css-loader',	//将css转成commonjs模块
 					'less-loader',	//将less转成css
 				]
@@ -49,6 +52,7 @@ var config = {
 	//	'react-dom': 'ReactDOM'
 	//},
 	plugins: [
+		new cleanWebpackPlugin(['public/dist']),
 		new htmlWebpackPlugin({
 			title: 'My app',
 			filename: path.resolve(__dirname, 'views', 'index.html'),	//这里需要传入绝对路径
@@ -58,6 +62,10 @@ var config = {
 		new miniCssExtractPlugin({
 			filename: "[name].css"
 		}),
+		new ExtractCssChunks({
+			filename: '[name].css',
+			chunkFilename: '[id].[chunkhash:6].css'
+		})
 	],
 	mode: 'production'
 };
