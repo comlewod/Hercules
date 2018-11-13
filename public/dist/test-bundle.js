@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{16:function(e,n,s){"use strict";s.r(n);var t=s(0),o=s.n(t);console.log("按需加载"),n.default=class extends t.Component{render(){return o.a.createElement("div",null,"this is test")}}}}]);
-//# sourceMappingURL=test-bundle.js.map

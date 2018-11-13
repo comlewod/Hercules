@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
+import './style'
+
 class Header extends Component{
 	render(){
 		return (
-			<div>lalala</div>
+			<div className="header">hahaha</div>
 		);
 	}
 }

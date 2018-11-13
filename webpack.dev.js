@@ -12,7 +12,9 @@ webpackConfig.mode = "development";
 webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());	//通过express中间件实现热替换时，实现浏览器刷新必写
 
 Object.keys(webpackConfig.entry).forEach((key) => {
-	webpackConfig.entry[key] = [hotQuery, webpackConfig.entry[key]];
+	if( key != 'vendors' ){
+		webpackConfig.entry[key] = [hotQuery, webpackConfig.entry[key]];
+	}
 });
 
 let compiler = webpack(webpackConfig);
@@ -32,7 +34,7 @@ app.use(webpackHotMiddleware(compiler, {
 //优先获取webpack的静态资源，所以express.static要写在后面，且静态资源要路径相同
 app.use(express.static(path.join(__dirname, 'public')));	
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, 'views', 'index.html'));
 });
 

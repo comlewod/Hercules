@@ -6,15 +6,16 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 var config = {
 	devtool: 'source-map',	//问题可以直接定位到源码，而不是压缩后的代码 
 	entry: {
-		app: path.resolve(__dirname, 'src', 'app.js')
+		app: path.resolve(__dirname, 'src', 'app.js'),
 		//有多少个对象就会引用多少个打包后的js文件
 		//app: [hotQuery, path.resolve(__dirname, 'src/app.js')],
 		//list: [hotQuery, path.resolve(__dirname, 'src/list.js')],
+		vendors: ['react', 'react-dom', 'react-router-dom']
 	},
 	output: {
 		publicPath: '/dist/',	//开发环境和生产环境不一样，线上可能是使用cdn，该值会直接生成在资源前面
 		path: path.resolve(__dirname, 'public', 'dist'),	//需要传入输出文件绝对路径
-		//chunkFilename: '[name].[chunkhash:6].js',
+		chunkFilename: '[name].[chunkhash:6].js',	//不是上面的入口文件引入的模块，比如按需加载时，加上hash前缀
 		filename: '[name]-bundle.js'
 	},
 	resolve: {
@@ -43,10 +44,10 @@ var config = {
 		]
 	},
 	//打包时不处理的依赖包
-	externals: {
-		'react': 'React',		//将script引入的react的中全局变量React变成webpack的模块react
-		'react-dom': 'ReactDOM'
-	},
+	//externals: {
+	//	'react': 'React',		//将script引入的react的中全局变量React变成webpack的模块react
+	//	'react-dom': 'ReactDOM'
+	//},
 	plugins: [
 		new htmlWebpackPlugin({
 			title: 'My app',
