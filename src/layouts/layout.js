@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../components/header/index'
+import { Link } from 'react-router-dom';	
 
 class Layout extends Component {
 	render(){
@@ -9,6 +10,10 @@ class Layout extends Component {
 
 const DOM = (
 	<div>
+		<Link to="/">home page</Link>
+		<Link to="/login"> login</Link>
+		<Link to="/login/test"> test</Link>
+
 		<Header />
 	</div>
 )
