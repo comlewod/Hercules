@@ -6,7 +6,7 @@ import './style';
 
 const Dom = () => (
 	<div>
-		<div>INDEX PAGE</div>
+		<div>Login Test Page</div>
 	</div>
 )
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
-import Layout from '../../layouts/layout'
+import Page from '../../containers/login/index'
+import Test from '../../containers/login/test'
 
 const Index = ({match}) => (
 	<Switch>
-		<Route path={match.path} exact component={() => (<div>login</div>)} />
-		<Route path={`${match.path}/test`} exact component={() => (<div>test123</div>)} />
+		<Route path={match.path} exact component={Page} />
+		<Route path={`${match.path}/test`} exact component={Test} />
 	</Switch>
 )
 

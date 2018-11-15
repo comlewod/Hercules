@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
-import Layout from '../../layouts/layout'
+import IndexPage from '../../containers/index/index'
 
 const Index = () => (
-	<Layout />
+	<IndexPage />
 )
 
 export default Index
