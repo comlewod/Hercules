@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
-
-import './style';
+import Layout from '../../layouts/layout'
 
 const Dom = () => (
 	<div>
-		<div>Login Test Page</div>
+		<div>LOGIN TEST PAGE</div>
 	</div>
 )
 

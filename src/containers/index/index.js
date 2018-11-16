@@ -13,7 +13,7 @@ const Dom = () => (
 class Index extends Component { 
 	render(){
 		return (
-			<Layout body={Dom} />
+			<Dom />
 		)
 	}
 }

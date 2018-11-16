@@ -1,21 +1,20 @@
-import React, { Component } from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
-import Layout from '../../layouts/layout'
+import React, { Component } from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
+
+import Test from './test'
+import Page from './page'
 
 import './style';
 
-const Dom = () => (
+const Index = ({match}) => (
 	<div>
-		<div>Login Page</div>
+		<h3>login</h3>
+		<Switch>
+			<Route path={match.path} exact component={Page} />
+			<Route path={`${match.path}/test`} exact component={Test} />
+		</Switch>
 	</div>
 )
 
-class Index extends Component { 
-	render(){
-		return (
-			<Layout body={Dom} />
-		)
-	}
-}
-
 export default Index
+
