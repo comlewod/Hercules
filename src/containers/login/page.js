@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
-import Layout from '../../layouts/layout'
 
-const Dom = () => (
-	<div>
-		<div>LOGIN PAGE</div>
-	</div>
-)
-
-class Index extends Component { 
+export default class Index extends Component { 
+	constructor(props){
+		super(props)
+		console.log(props)
+	}
+	handleSubmit(e){
+		console.log('submit')
+	}
 	render(){
 		return (
-			<Dom />
+			<div>
+				<div className="login-input">
+					<label>user</label>
+					<input name="name" />
+				</div>
+				<div className="login-input">
+					<label>password</label>
+					<input name="pwd" />
+				</div>
+				<button onClick={this.handleSubmit}>SUBMIT</button>
+			</div>
 		)
 	}
 }
-
-export default Index

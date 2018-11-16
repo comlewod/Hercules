@@ -8,7 +8,7 @@ import './style';
 
 const Index = ({match}) => (
 	<div>
-		<h3>login</h3>
+		<h3>Login</h3>
 		<Switch>
 			<Route path={match.path} exact component={Page} />
 			<Route path={`${match.path}/test`} component={Test} />
