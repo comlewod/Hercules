@@ -16,7 +16,7 @@ const Dom = () => (
 		<Header />
 		<Switch>
 			<Route path="/" exact component={IndexRouter} />
-			<Route path="/login" exact component={AsyncLogin} />
+			<Route path="/login" component={AsyncLogin} />
 			<Route component={Nomatch} />
 		</Switch>
 	</Fragment>

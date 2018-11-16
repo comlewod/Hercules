@@ -10,7 +10,7 @@ const Index = ({match}) => (
 	<div>
 		<h3>login</h3>
 		<Switch>
-			<Route path={match.path} component={Page} />
+			<Route path={match.path} exact component={Page} />
 			<Route path={`${match.path}/test`} component={Test} />
 		</Switch>
 	</div>
