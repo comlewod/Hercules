@@ -11,7 +11,6 @@ import './components/common'
 //为避免相同layout的公用部分重复渲染，根据layout来分路由（只渲染路由部分即可）
 import Layout from './layouts/layout'
 
-//路由器组件无法接受两个及以上的子元素，包括自定义组件。
 render(
 	<BrowserRouter>
 		<Switch>

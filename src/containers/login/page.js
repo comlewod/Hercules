@@ -4,7 +4,7 @@ import Layout from '../../layouts/layout'
 
 const Dom = () => (
 	<div>
-		<div>LOGIN TEST PAGE</div>
+		<div>LOGIN PAGE</div>
 	</div>
 )
 

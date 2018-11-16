@@ -1,17 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom';	
+import Loadable from 'react-loadable'
 
 import IndexRouter from '../containers/index/index'
 import Header from '../components/header/index'
+import loading from '../components/lazyload/loading'
 
-//该layout的所有路由
-const routers = [
-	{ path: '/login', component: 'login/index' }
-]
-
-let routerArr = routers.map((obj, index) => {
-	let component = require('../containers/' + obj.component ).default//动态引入要加上限定的路径'./'
-	return <Route key={index} path={obj.path} component={component} />
+const AsyncLogin = Loadable({
+	loader: () => import('../containers/login/index'),
+	loading: loading 
 })
 
 const Dom = () => (
@@ -19,9 +16,14 @@ const Dom = () => (
 		<Header />
 		<Switch>
 			<Route path="/" exact component={IndexRouter} />
-			{ routerArr }
+			<Route path="/login" exact component={AsyncLogin} />
+			<Route component={Nomatch} />
 		</Switch>
 	</Fragment>
+)
+
+const Nomatch = () => (
+	<h1>404</h1>
 )
 
 class Layout extends Component {

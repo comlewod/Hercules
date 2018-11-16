@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const openBrowser = require('react-dev-utils/openBrowser');
+//const openBrowser = require('react-dev-utils/openBrowser');
 
 var app = express();
 
