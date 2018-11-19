@@ -3,6 +3,7 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+//const openBrowser = require('react-dev-utils/openBrowser');
 
 const hotQuery = "webpack-hot-middleware/client?noInfo=true&reload=true";
 const config = require('./config');
@@ -34,9 +35,16 @@ app.use(webpackHotMiddleware(compiler, {
 //优先获取webpack的静态资源，所以express.static要写在后面，且静态资源要路径相同
 app.use(express.static(path.join(__dirname, 'public')));	
 
+app.use('/api', require('./controllers'));
+
 app.get('/*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, 'views', 'index.html'));
 });
 
 app.listen(config.SERVER_PORT);
 
+//app.listen(PORT, () => {
+//	if( openBrowser('http://localhost:' + PORT) ){
+//		console.log('The browser tab has benn opened');
+//	}
+//});

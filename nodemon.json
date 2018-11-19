@@ -1,0 +1,4 @@
+{
+	"watch": ["www", "controller", "app"],
+	"ignore": ["src"]
+}
