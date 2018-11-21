@@ -1,4 +1,4 @@
 {
-	"watch": ["www", "controller", "app"],
+	"watch": ["www", "controller", "middlewares"],
 	"ignore": ["src"]
 }

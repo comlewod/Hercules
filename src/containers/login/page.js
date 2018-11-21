@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 import axios from 'axios'
 
-export default class Index extends Component { 
+class Index extends Component { 
 	constructor(props){
 		super(props)
 		this.state = {
-			str: 'haha'
+			str: 'haha'	
 		}
+		this.redux = props.test
+		this.changecart = props.changecart
 		//通过bind返回新函数并绑定this，相当于传了this参数
 		this.handleSubmit = this.handleSubmit.bind(this)
 	}
@@ -15,6 +18,7 @@ export default class Index extends Component {
 		this.setState({
 			str: 'aaaa'
 		})
+		this.changecart()
 		axios.get('/api/login')
 		.then(res => {
 			console.log(res)
@@ -31,6 +35,8 @@ export default class Index extends Component {
 					<label>password</label>
 					<input name="pwd" />
 				</div>
+				<div>{this.props.test.cartobj.cart}</div>
+				<div>{this.redux.cartobj.cart}</div>
 				<div>{this.state.str}</div>
 				{/* 并不是把onclick直接绑定在dom上，所以该函数的this并不是该实例 */}
 				<button onClick={this.handleSubmit}>SUBMIT</button>
@@ -38,3 +44,25 @@ export default class Index extends Component {
 		)
 	}
 }
+
+//提供redux的state数据
+const sendState = state => {
+	return {
+		test: state,
+	}
+}
+
+//提供redux的dispatch方法
+const sendDispatch = dispatch => {
+	return {
+		changecart: () => {
+			dispatch({
+				type: 'add',
+				str: 'new cart'
+			})
+		}
+	}
+}
+
+export default connect(sendState, sendDispatch)(Index)
+

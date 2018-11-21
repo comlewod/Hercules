@@ -33,13 +33,7 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 //优先获取webpack的静态资源，所以express.static要写在后面，且静态资源要路径相同
-app.use(express.static(path.join(__dirname, 'public')));	
-
-app.use('/api', require('./controllers'));
-
-app.get('/*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, 'views', 'index.html'));
-});
+app = require('./middlewares/app')(app);
 
 app.listen(config.SERVER_PORT);
 
