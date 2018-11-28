@@ -6,7 +6,7 @@ import IndexRouter from '../containers/index/index'
 import Header from '../components/header/index'
 import loading from '../components/lazyload/loading'
 
-//按需加载，异步加载模块
+//根据路由异步加载模块（只能作为路由模块的组件）
 const AsyncLogin = Loadable({
 	loader: () => import('../containers/login/index'),
 	loading: loading 

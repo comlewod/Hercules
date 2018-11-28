@@ -16,10 +16,10 @@ import './components/common'
 //为避免相同layout的公用部分重复渲染，根据layout来分路由（只渲染路由部分即可）
 import Layout from './layouts/layout'
 
-const initData = {
+var initData = {
 	cart: 'cart' 
 }
-const cartReducer = (state=initData, action) => {
+var cartReducer = (state=initData, action) => {
 	if( action.type == 'add' ){
 		return { cart: action.str }
 	} else {
@@ -27,8 +27,8 @@ const cartReducer = (state=initData, action) => {
 	}
 }
 
-const product = 'test'
-const productReducer = (state=product, action) => {
+var product = 'test'
+var productReducer = (state=product, action) => {
 	return state
 }
 
@@ -41,7 +41,7 @@ const rootReducer = combineReducers(reducer)
 
 const store = createStore(rootReducer)
 store.subscribe(() => {
-	//console.log(store.getState())
+	console.log(store.getState())
 })
 //store.dispatch(action)
 

@@ -6,10 +6,11 @@ import axios from 'axios'
 class Index extends Component { 
 	constructor(props){
 		super(props)
+		console.log(props)
 		this.state = {
 			str: 'haha'	
 		}
-		this.redux = props.test
+		this.obj = props.test
 		this.changecart = props.changecart
 		//通过bind返回新函数并绑定this，相当于传了this参数
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,7 +22,7 @@ class Index extends Component {
 		this.changecart()
 		axios.get('/api/login')
 		.then(res => {
-			console.log(res)
+			//console.log(res)
 		})
 	}
 	render(){
@@ -35,8 +36,8 @@ class Index extends Component {
 					<label>password</label>
 					<input name="pwd" />
 				</div>
-				<div>{this.props.test.cartobj.cart}</div>
-				<div>{this.redux.cartobj.cart}</div>
+				<div>{this.props.test.cart}</div>
+				<div>{this.obj.cart}</div>
 				<div>{this.state.str}</div>
 				{/* 并不是把onclick直接绑定在dom上，所以该函数的this并不是该实例 */}
 				<button onClick={this.handleSubmit}>SUBMIT</button>
@@ -48,7 +49,7 @@ class Index extends Component {
 //提供redux的state数据
 const sendState = state => {
 	return {
-		test: state,
+		test: state.cartobj,
 	}
 }
 

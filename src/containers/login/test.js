@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const Dom = () => (
 	<div>
@@ -8,11 +9,24 @@ const Dom = () => (
 )
 
 class Index extends Component { 
-	render(){
+	constructor(props){
+		super(props)
+	}
+	render(props){
 		return (
-			<Dom />
+			<div>
+				<div>{this.props.test.cart}</div>
+				<Dom />
+			</div>
 		)
 	}
 }
 
-export default Index
+
+const sendState = state => {
+	return {
+		test: state.cartobj,
+	}
+}
+
+export default connect(sendState)(Index)
