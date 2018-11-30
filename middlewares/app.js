@@ -16,14 +16,16 @@ module.exports = app => {
 	//后端路由
 	app.use('/api', require('../controllers'));
 
+	app.get('/test', (req, res) => {
+		res.sendFile(path.resolve(config.ROOT, 'views', 'test.html'));
+	});
+
 	//前端路由
 	app.get('/*', (req, res) => {
 		//不使用渲染引擎，所以使用sendFile
 		res.sendFile(path.resolve(config.ROOT, 'views', 'index.html'));
 	});
 
-	//app.get('/test', (req, res) => {
-	//	res.sendFile(path.resolve(__dirname, 'views', 'test.html'));
-	//});
+	
 	return app;
 }

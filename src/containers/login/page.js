@@ -6,14 +6,16 @@ import axios from 'axios'
 class Index extends Component { 
 	constructor(props){
 		super(props)
-		console.log(props)
 		this.state = {
+			tabIndex: 0,
 			str: 'haha'	
 		}
 		this.obj = props.test
 		this.changecart = props.changecart
 		//通过bind返回新函数并绑定this，相当于传了this参数
-		this.handleSubmit = this.handleSubmit.bind(this)
+		//this.handleSubmit = this.handleSubmit.bind(this)
+		//this.changeTab = this.changeTab.bind(this)
+		console.log(this)
 	}
 	handleSubmit(e){
 		this.setState({
@@ -22,25 +24,49 @@ class Index extends Component {
 		this.changecart()
 		axios.get('/api/login')
 		.then(res => {
-			//console.log(res)
+		})
+	}
+	changeTab(index){
+		this.setState({
+			tabIndex: index
 		})
 	}
 	render(){
 		return (
 			<div>
-				<div className="login-input">
-					<label>user</label>
-					<input name="name" />
+				<div>
+					<span onClick={() => (this.changeTab(0))}>Sign in</span>
+					<span onClick={() => (this.changeTab(1))}>Sign up</span>
 				</div>
-				<div className="login-input">
-					<label>password</label>
-					<input name="pwd" />
+				<br/>
+
+				{ !this.state.tabIndex && (
+				<div>
+					<h3>SIGN IN</h3>
+					<div className="login-input">
+						<label>user</label>
+						<input name="name" />
+					</div>
+					<div className="login-input">
+						<label>password</label>
+						<input name="pwd" />
+					</div>
+					{/*
+					<div>{this.props.test.cart}</div>
+					<div>{this.obj.cart}</div>
+					<div>{this.state.str}</div>
+					*/}
+					{/* 并不是把onclick直接绑定在dom上，所以该函数的this并不是该实例，传入的函数只是一个局部变量  */}
+					<button onClick={() => this.handleSubmit()}>SUBMIT</button>
+					<button onClick={ function(){ console.log(this) } }>SUBMIT</button>
 				</div>
-				<div>{this.props.test.cart}</div>
-				<div>{this.obj.cart}</div>
-				<div>{this.state.str}</div>
-				{/* 并不是把onclick直接绑定在dom上，所以该函数的this并不是该实例 */}
-				<button onClick={this.handleSubmit}>SUBMIT</button>
+				)}
+
+				{ this.state.tabIndex && (
+				<div>
+					<h3>SIGN UP</h3>
+				</div>
+				)}
 			</div>
 		)
 	}
