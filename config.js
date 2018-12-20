@@ -3,7 +3,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 
 var config = {
-	SERVER_PORT: 5000,
+	SERVER_PORT: 5006,
 	ROOT: __dirname,
 };
 

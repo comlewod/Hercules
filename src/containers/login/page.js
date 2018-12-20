@@ -7,15 +7,13 @@ class Index extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
+			name: '',
+			pwd: '',
 			tabIndex: 0,
 			str: 'haha'	
 		}
 		this.obj = props.test
 		this.changecart = props.changecart
-		//通过bind返回新函数并绑定this，相当于传了this参数
-		//this.handleSubmit = this.handleSubmit.bind(this)
-		//this.changeTab = this.changeTab.bind(this)
-		console.log(this)
 	}
 	handleSubmit(e){
 		this.setState({
@@ -31,6 +29,11 @@ class Index extends Component {
 			tabIndex: index
 		})
 	}
+	inputChange(ev, key){
+		let obj = {}
+		obj[key] = ev.target.value
+		this.setState(obj)
+	}
 	render(){
 		return (
 			<div>
@@ -44,12 +47,12 @@ class Index extends Component {
 				<div>
 					<h3>SIGN IN</h3>
 					<div className="login-input">
-						<label>user</label>
-						<input name="name" />
+						<label>user: </label>
+						<input name="name" value={this.state.name} onChange={(ev) => this.inputChange(ev, 'name')} />
 					</div>
 					<div className="login-input">
 						<label>password</label>
-						<input name="pwd" />
+						<input name="pwd" value={this.state.pwd} onChange={(ev) => this.inputChange(ev, 'pwd')} />
 					</div>
 					{/*
 					<div>{this.props.test.cart}</div>

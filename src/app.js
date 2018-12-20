@@ -2,10 +2,9 @@
 
 import React from 'react'
 import { render } from 'react-dom'
-import { Route, Switch } from 'react-router-dom'
 //browserHistroy模块已经从react-router独立出来，可以监听url变化，并生成location对象，并匹配到路由组件
 //react-router-dom相比于react-router，提供了不少组件：Link、browserHistroy等
-import { HashRouter, BrowserRouter } from 'react-router-dom'
+import { Route, Switch, HashRouter, BrowserRouter } from 'react-router-dom'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 

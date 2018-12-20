@@ -40,7 +40,19 @@
 </div>
 
 <script>
-
+var x = 11;
+var obj = {
+	x: 22,
+	a: {
+		a: 33,
+		fn(){
+			console.log(this);
+		}
+	}
+};
+obj.a.fn();
+var fn = obj.a.fn;
+fn();
 </script>
 
 </body>
