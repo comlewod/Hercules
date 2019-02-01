@@ -28,18 +28,62 @@
 	font-weight: bold;
 	max-width: 30%;
 }
-
+iframe {
+	width: 100%;
+	height:800px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="box">
+727742133793_5c470db985e2b0.11404064_35bc845ba54f0a53bf7132829909b7441b033454
+CBB900098
 	<div class="item">1</div>
 	<div class="item">2</div>
-</div>
+	<br>
+	<h2>shein</h2>
+	<!--<form action="https://pc3.shein.com/ltspc/transformer/XCY900098" method="post">-->
+	<form action="http://localhost:3008/ltspc/transformer/XCY900098" method="post">-->
+		siteuid<input name="SiteUID" value="m" />
+		token<input name="Token" value="727742133793_5c470db985e2b0.11404064_35bc845ba54f0a53bf7132829909b7441b033454" />
+		applanguage<input name="AppLanguage" value="en" />
+		appcurrency<input name="AppCurrency" value="USD" />
 
+		paycode<input name="payCode" value="worldpay-card" />
+		语言文件lang<input name="lang" value="en" />
+		sitefrom<input name="siteFrom" value="m" />
+		email<input name="email" value="aa@123.com" />
+		nickname<input name="nickname" value="aa" />
+		<button type="submit">submit</button>
+	</form>
+
+	<h2>romwe</h2>
+	<!--<form action="https://pc3.romwe.com/ltspc/transformer/RWLXZ44877" method="post">-->
+	<--<form action="http://localhost:3007/ltspc/transformer/RWLXZ44877" method="post">-->
+        siteuid<input name="SiteUID" value="rw" />
+        token<input name="Token" value="371619560285_5c467bef103cc5.96326273_629deb760e57d119a17be6ca034304a4d44633f7" />
+        applanguage<input name="AppLanguage" value="en" />
+        appcurrency<input name="AppCurrency" value="USD" />
+
+        paycode<input name="payCode" value="worldpay-card" />
+        语言文件lang<input name="lang" value="en" />
+        sitefrom<input name="siteFrom" value="pc" />
+		email<input name="email" value="aa@123.com" />
+		nickname<input name="nickname" value="aa" />
+        <button type="submit">submit</button>
+    </form>
+	
+</div>
+<!--
+<iframe id="iframetest" src="http://localhost:3000/transformer/RWLXZ44877?SiteUID=rw&Token=371619560285_5c467bef103cc5.96326273_629deb760e57d119a17be6ca034304a4d44633f7&AppLanguage=en&AppCurrency=USD&lang=en&siteFrom=pc&payCode=worldpay">
+	</iframe>
+-->
+
+<button onclick="test()">test</button>
 <script>
+/*
 var x = 11;
 var obj = {
 	x: 22,
@@ -53,6 +97,22 @@ var obj = {
 obj.a.fn();
 var fn = obj.a.fn;
 fn();
+*/
+
+
+    // 这里是关键，发送信息
+    //window.parent.frames[0].postMessage('haha', '*');
+//console.log(document.getElementById("iframetest").contentWindow);
+/*
+function test(){
+	console.log($('#iframetest')[0].contentWindow.$('#message').length)
+}
+window.addEventListener('message', function(e) {
+	console.log(e.data);
+});
+*/
+
+
 </script>
 
 </body>
