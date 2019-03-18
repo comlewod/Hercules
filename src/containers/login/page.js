@@ -14,6 +14,7 @@ class Index extends Component {
 		}
 		this.obj = props.test
 		this.changecart = props.changecart
+		this.testClick = this.testClick.bind(this)
 	}
 	handleSubmit(e){
 		this.setState({
@@ -34,12 +35,17 @@ class Index extends Component {
 		obj[key] = ev.target.value
 		this.setState(obj)
 	}
+	testClick(){
+		//如果没有前面的this.testClick = this.testClick.bind(this)，这里的this将会是undefined
+		console.log(this)
+	}
 	render(){
 		return (
 			<div>
 				<div>
 					<span onClick={() => (this.changeTab(0))}>Sign in</span>
 					<span onClick={() => (this.changeTab(1))}>Sign up</span>
+					<span onClick={this.testClick}>test click</span>
 				</div>
 				<br/>
 
