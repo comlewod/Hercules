@@ -6,7 +6,7 @@
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <style>
 #canvas {
-	border: 1px solid #000;
+	border: 1px solid #999;
 }
 </style>
 <body>
@@ -18,12 +18,20 @@ function drawBall(ctx){
 	ctx.beginPath()
 	let x = parseInt(WIDTH * Math.random())
 	let y = parseInt(HEIGHT* Math.random())
+	let speed = 0.1
+	let speedX = speed * (Math.random() - 0.5)
+	let speedY = speed * (Math.random() - 0.5)
 	let radius = 5
 	position.push({
-		x, y
+		x, y, 
+		speed: {
+			x: speedX,
+			y: speedY
+		}
 	})
-	ctx.arc(x, y, radius, 0, CIRCLE)
-	ctx.fill()
+	//ctx.arc(x, y, radius, 0, CIRCLE)
+	//ctx.fillStyle = '#fff'
+	//ctx.fill()
 }
 
 let canvas = document.getElementById('canvas')
@@ -44,20 +52,28 @@ var drawNew = function(){
 	ctx.clearRect(0, 0, WIDTH, HEIGHT)
 	position.forEach(item => {
 		ctx.beginPath()
-		let disX = 4 * Math.random() - 2
-		let disY = 4 * Math.random() - 2
-		let x = item.x + disX
-		let y = item.y + disY
-		newPosition.push({x, y})
-		ctx.arc(x, y, radius, 0, CIRCLE)
-		ctx.fill()
+		//let disX = 4 * Math.random() - 2
+		//let disY = 4 * Math.random() - 2
+		let x = item.x + item.speed.x 
+		let y = item.y + item.speed.y 
+		if( x < 0 || x > WIDTH ) item.speed.x = -item.speed.x
+		if( y < 0 || y > HEIGHT ) item.speed.y = -item.speed.y
+		newPosition.push({x, y, speed: item.speed})
+		//ctx.arc(x, y, radius, 0, CIRCLE)
+		//ctx.fillStyle = '#fff'
+		//ctx.fill()
 
 		position.forEach(val => {
-			let minDis = 20
-			if( Math.abs(val.x - x) < minDis && Math.abs(val.y - y) < minDis ){
+			let minDis = 50
+			let absX = Math.abs(val.x - x)
+			let absY = Math.abs(val.y - y)
+			if(  absX < minDis &&  absY < minDis ){
+				//let lenRate =  Math.sqrt( Math.pow(absX, 2) + Math.pow(absY, 2) ) / minDis
 				ctx.beginPath()
+				ctx.lineWidth = 1
 				ctx.moveTo(val.x, val.y)
 				ctx.lineTo(x, y)
+				ctx.strokeStyle = 'rgba(0, 0, 0, .1)'
 				ctx.stroke()
 			}
 		})
