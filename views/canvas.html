@@ -10,15 +10,13 @@
 }
 </style>
 <body>
-	<canvas id="canvas" width="600" height="600"></canvas>
-</div>
-
+<canvas id="canvas" width="600" height="600"></canvas>
 <script>
 function drawBall(ctx){
 	ctx.beginPath()
 	let x = parseInt(WIDTH * Math.random())
 	let y = parseInt(HEIGHT* Math.random())
-	let speed = 0.1
+	let speed = 10
 	let speedX = speed * (Math.random() - 0.5)
 	let speedY = speed * (Math.random() - 0.5)
 	let radius = 5
@@ -41,7 +39,7 @@ const HEIGHT = canvas.height
 const CIRCLE = Math.PI * 2
 
 let position = []
-for( let i=0; i<200; i++ ){
+for( let i=0; i<100; i++ ){
 	drawBall(ctx)
 }
 //setInterval(() => {
@@ -64,7 +62,7 @@ var drawNew = function(){
 		//ctx.fill()
 
 		position.forEach(val => {
-			let minDis = 50
+			let minDis = 600
 			let absX = Math.abs(val.x - x)
 			let absY = Math.abs(val.y - y)
 			if(  absX < minDis &&  absY < minDis ){

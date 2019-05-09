@@ -22,6 +22,9 @@ module.exports = app => {
 	app.get('/demo', (req, res) => {
 		res.sendFile(path.resolve(config.ROOT, 'views', 'demo.html'));
 	});
+	app.get('/canvas', (req, res) => {
+		res.sendFile(path.resolve(config.ROOT, 'views', 'canvas.html'));
+	});
 
 	//前端路由
 	app.get('/*', (req, res) => {
