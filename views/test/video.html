@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>App</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<style>
+html body {
+	padding: 0;
+	margin: 0;
+}
+#canvas {
+	/*border: 1px solid #999;*/
+	width: 500px;
+}
+</style>
+<body>
+<div>原视频</div>
+<video id="video" src="img/wonder.mkv" controls width="500"></video>
+<div>
+<div>canvas处理后</div>
+<canvas id="canvas" width="600"></canvas>
+</div>
+
+<script>
+let video = document.getElementById('video')
+let canvas = document.getElementById('canvas')
+let ctx = canvas.getContext('2d')
+
+//视频播放后才可以获取图像信息
+video.addEventListener('play', function(){
+	let { videoWidth, videoHeight } = video
+	canvas.width = videoWidth 
+	canvas.height = videoHeight 
+	captureScreen()
+})
+
+var captureScreen = function(){
+	if( video.paused || video.ended ) return
+	let { width, height } = canvas
+	ctx.drawImage(video, 0, 0, width, height)
+	let imgData = ctx.getImageData(0, 0, width, height) //获取画布区域的像素数据
+	let newImgData = ctx.createImageData(imgData)
+
+	//数组按每个像素点颜色rgba各项值排列
+	for( let i=0; i<imgData.data.length; i+=4 ){
+		let data = imgData.data
+		let r = data[i]
+		let g = data[i+1]
+		let b = data[i+2]
+		let a = data[i+3]
+
+		let gray = 0.3 * r + 0.59 * g + 0.11 * b //灰阶结算：Gray = (Red * 0.3 + Green * 0.59 + Blue * 0.11)
+		newImgData.data[i] = gray
+		newImgData.data[i+1] = gray
+		newImgData.data[i+2] = gray
+		newImgData.data[i+3] = a
+	}
+	ctx.putImageData(newImgData, 0, 0)	//将处理后的rgba数据重新渲染到画布上
+	requestAnimationFrame(captureScreen)
+}
+
+</script>
+</body>
+</html>

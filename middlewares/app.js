@@ -19,6 +19,17 @@ module.exports = app => {
 	app.get('/test', (req, res) => {
 		res.sendFile(path.resolve(config.ROOT, 'views', 'test.html'));
 	});
+
+	app.get('/image', (req, res) => {
+		res.sendFile(path.resolve(config.ROOT, 'views', 'test', 'image.html'));
+	});
+	app.get('/video', (req, res) => {
+		res.sendFile(path.resolve(config.ROOT, 'views', 'test', 'video.html'));
+	});
+	app.get('/moving', (req, res) => {
+		res.sendFile(path.resolve(config.ROOT, 'views', 'test', 'moving.html'));
+	});
+
 	app.get('/demo', (req, res) => {
 		res.sendFile(path.resolve(config.ROOT, 'views', 'demo.html'));
 	});

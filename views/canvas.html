@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Webpack App</title>
+<title>App</title>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <style>
 #canvas {
@@ -12,75 +12,79 @@
 <body>
 <canvas id="canvas" width="600" height="600"></canvas>
 <script>
-function drawBall(ctx){
-	ctx.beginPath()
-	let x = parseInt(WIDTH * Math.random())
-	let y = parseInt(HEIGHT* Math.random())
-	let speed = 10
-	let speedX = speed * (Math.random() - 0.5)
-	let speedY = speed * (Math.random() - 0.5)
-	let radius = 5
-	position.push({
-		x, y, 
-		speed: {
-			x: speedX,
-			y: speedY
-		}
-	})
-	//ctx.arc(x, y, radius, 0, CIRCLE)
-	//ctx.fillStyle = '#fff'
-	//ctx.fill()
-}
-
 let canvas = document.getElementById('canvas')
 let ctx = canvas.getContext('2d')
 const WIDTH = canvas.width
 const HEIGHT = canvas.height
-const CIRCLE = Math.PI * 2
 
-let position = []
-for( let i=0; i<100; i++ ){
-	drawBall(ctx)
-}
-//setInterval(() => {
-var drawNew = function(){ 
-	ctx.beginPath()
-	let newPosition = []
-	let radius = 5
-	ctx.clearRect(0, 0, WIDTH, HEIGHT)
-	position.forEach(item => {
-		ctx.beginPath()
-		//let disX = 4 * Math.random() - 2
-		//let disY = 4 * Math.random() - 2
-		let x = item.x + item.speed.x 
-		let y = item.y + item.speed.y 
-		if( x < 0 || x > WIDTH ) item.speed.x = -item.speed.x
-		if( y < 0 || y > HEIGHT ) item.speed.y = -item.speed.y
-		newPosition.push({x, y, speed: item.speed})
-		//ctx.arc(x, y, radius, 0, CIRCLE)
-		//ctx.fillStyle = '#fff'
-		//ctx.fill()
+class Painter{
+	constructor(ctx, maxSpeed=5, quantity=100, minDis=50, lineWidth=1, color='rgba(0, 0, 0, 0.1)'){
+		this.maxSpeed = maxSpeed
+		this.quantity = quantity
+		this.minDis = minDis 
+		this.lineWidth = lineWidth
+		this.color = color
+		this.ctx = ctx
 
-		position.forEach(val => {
-			let minDis = 600
-			let absX = Math.abs(val.x - x)
-			let absY = Math.abs(val.y - y)
-			if(  absX < minDis &&  absY < minDis ){
-				//let lenRate =  Math.sqrt( Math.pow(absX, 2) + Math.pow(absY, 2) ) / minDis
-				ctx.beginPath()
-				ctx.lineWidth = 1
-				ctx.moveTo(val.x, val.y)
-				ctx.lineTo(x, y)
-				ctx.strokeStyle = 'rgba(0, 0, 0, .1)'
-				ctx.stroke()
+		this.position = []
+		//生成随机位置和速度
+		for( let i=0; i<this.quantity; i++ ){
+			let x = parseInt(WIDTH * Math.random())
+			let y = parseInt(HEIGHT* Math.random())
+			let speedX = this.maxSpeed * (Math.random() - 0.5) || 1
+			let speedY = this.maxSpeed * (Math.random() - 0.5) || 1
+
+			this.position.push({
+				x, y, 
+				speed: {
+					x: speedX,
+					y: speedY
+				}
+			})
+		}
+	}
+	drawBall(){
+		let _this = this
+		let newPosition = []
+		let posLen = this.position.length
+		let ctx = this.ctx
+		ctx.clearRect(0, 0, WIDTH, HEIGHT)
+		this.position.forEach((item, index) => {
+			let { x, y } = item
+			 
+			for( let i=index; i<posLen; i++ ){
+				if( _this.position[i] ){
+					let val = _this.position[i]
+					let absX = Math.abs(val.x - x)
+					let absY = Math.abs(val.y - y)
+					if(  absX < _this.minDis &&  absY < _this.minDis ){
+						ctx.beginPath()
+						ctx.lineWidth = _this.lineWidth
+						ctx.moveTo(val.x, val.y)
+						ctx.lineTo(x, y)
+						ctx.strokeStyle = _this.color
+						ctx.stroke()
+					}
+				}
 			}
+			x = item.x + item.speed.x 
+			y = item.y + item.speed.y
+			
+			if( x < 0 || x > WIDTH ) item.speed.x = -item.speed.x
+			if( y < 0 || y > HEIGHT ) item.speed.y = -item.speed.y
+			newPosition.push({x, y, speed: item.speed})
 		})
-	})
-	position = newPosition
-	requestAnimationFrame(drawNew)
-}
-requestAnimationFrame(drawNew)
-</script>
+		this.position = newPosition
 
+		//按1秒60帧来显示，两者比较
+		//requestAnimationFrame(() => this.drawBall())
+		setTimeout(() => this.drawBall(), 16)
+	}
+}
+
+let ant_1 = new Painter(ctx, 5, 200, 100, 1)
+ant_1.drawBall()
+
+</script>
 </body>
 </html>

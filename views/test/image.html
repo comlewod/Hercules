@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>App</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<style>
+#canvas {
+	/*border: 1px solid #999;*/
+}
+</style>
+<body>
+<span>
+	<span>原图</span>
+	<!--
+	<img id="img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557577823832&di=55a6e4f84890775f1d72a9d86f7c487b&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F8435621246%2F640" />
+	-->
+	<img id="img" src="img/model.png" />
+</span>
+
+<span>
+	<span>canvas处理后</span>
+	<canvas id="canvas" width="300" height="300"></canvas>
+</span>
+
+<script>
+let canvas = document.getElementById('canvas')
+let ctx = canvas.getContext('2d')
+let img = document.getElementById('img')
+
+img.onload = () => {
+	let { width, height } = img
+	canvas.width = width
+	canvas.height= height
+	ctx.drawImage(img, 0, 0) //将图片渲染在画布上
+	let imgData = ctx.getImageData(0, 0, width, height) //获取画布区域的像素数据
+	let newImgData = ctx.createImageData(imgData)
+
+	//数组按每个像素点颜色rgba各项值排列
+	for( let i=0; i<imgData.data.length; i+=4 ){
+		let data = imgData.data
+		let r = data[i]
+		let g = data[i+1]
+		let b = data[i+2]
+		let a = data[i+3]
+
+		let gray = 0.3 * r + 0.59 * g + 0.11 * b //灰阶结算：Gray = (Red * 0.3 + Green * 0.59 + Blue * 0.11)
+		newImgData.data[i] = gray
+		newImgData.data[i+1] = gray
+		newImgData.data[i+2] = gray
+		newImgData.data[i+3] = a
+
+	}
+	ctx.putImageData(newImgData, 0, 0)	//将处理后的rgba数据重新渲染到画布上
+	console.log(canvas.toDataURL())
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>App</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<style>
+#canvas {
+	border: 1px solid #999;
+}
+</style>
+<body>
+<canvas id="canvas" width="600" height="600"></canvas>
+<script>
+
+let canvas = document.getElementById('canvas')
+let ctx = canvas.getContext('2d')
+let moveObj = null
+const WIDTH = canvas.width
+const HEIGHT = canvas.height
+
+let position = {x: 0, y: 0}
+
+function moveRect(){
+	ctx.clearRect(0, 0, WIDTH, HEIGHT)
+	let x = position.x
+	let y = position.y
+	ctx.fillRect(x, y, 30, 30)
+	position.x += 2
+
+	moveObj = requestAnimationFrame(moveRect)
+}
+
+moveRect()
+
+</script>
+
+</body>
+</html>
